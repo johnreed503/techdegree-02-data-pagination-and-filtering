@@ -29,7 +29,7 @@ function showPage(list, page) {
 //loops through the student list, using the startIndex and endIndex to only create student items when on the 9 students of that page
   for (let i = 0; i < list.length; i ++) {
     if (i >= startIndex && i < endIndex) {
-      studentItem =
+      let studentItem =
       `
         <li class="student-item cf">
         <div class="student-details">
@@ -47,14 +47,34 @@ function showPage(list, page) {
     };
   }
 }
-showPage(data, 3)
-
 
 /*
-Create the `addPagination` function
-This function will create and insert/append the elements needed for the pagination buttons
+addPagination adds the appropriate amount of buttons based on the number of students
 */
-
-
+function addPagination(list) {
+  let numOfPages = Math.ceil(list.length / 9)
+  let linkList = document.querySelector('.link-list')
+  linkList.innerHTML = ''
+  for (let i = 1; i <= numOfPages; i ++) {
+    let button = `
+      <li>
+        <button type="button">${i}</button>
+      </li>
+    `
+    linkList.insertAdjacentHTML('beforeend', button)
+  }
+//sets up the first button to be active
+  linkList.querySelector('button').className = "active"
+//listens for clicks in linkList
+  linkList.addEventListener('click', (event) => {
+    if (event.target.tagName == "BUTTON") {
+      linkList.querySelector(".active").className = ''
+      event.target.className = "active"
+      showPage(list, event.target.textContent)
+     }
+  })
+}
 
 // Call functions
+showPage(data, 1)
+addPagination(data)
