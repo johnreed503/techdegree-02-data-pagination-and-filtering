@@ -2,14 +2,18 @@
 Treehouse Techdegree:
 FSJS Project 2 - Data Pagination and Filtering
 */
+let searchButtonL = document.querySelector('.header')
+let searchButton = `
+    <label for="search" class="student-search">
+    <input id="search" placeholder="Search by name...">
+    <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
+    </label>
+`
+searchButtonL.insertAdjacentHTML('beforeend', searchButton);
 
+function nameSearch() {
 
-
-/*
-For assistance:
-   Check out the "Project Resources" section of the Instructions tab: https://teamtreehouse.com/projects/data-pagination-and-filtering#instructions
-   Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
-*/
+}
 
 
 
@@ -17,7 +21,6 @@ For assistance:
 Create the `showPage` function
 This function will create and insert/append the elements needed to display a "page" of nine students
 */
-
 //accepts list of students and a page number as a parameter and displays the appropriate 9 students
 function showPage(list, page) {
   let startIndex = (page * 9) - 9;
