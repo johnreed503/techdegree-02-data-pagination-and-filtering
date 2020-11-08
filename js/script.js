@@ -2,18 +2,32 @@
 Treehouse Techdegree:
 FSJS Project 2 - Data Pagination and Filtering
 */
-let searchButtonL = document.querySelector('.header')
+let searchLink = document.querySelector('.header')
 let searchButton = `
     <label for="search" class="student-search">
     <input id="search" placeholder="Search by name...">
     <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
     </label>
 `
-searchButtonL.insertAdjacentHTML('beforeend', searchButton);
+searchLink.insertAdjacentHTML('beforeend', searchButton);
 
-function nameSearch() {
-
+function nameSearch(list) {
+  searchLink.addEventListener('keyup', (event) => {
+    let newList = []
+    if (event.target.tagName == "INPUT") {
+      let lowerCaseSearch = event.target.value.toLowerCase()
+      for (let i = 0; i < list.length; i++){
+        let name = `${list[i].name.first.toLowerCase()} ${list[i].name.first.toLowerCase()}`
+        if (name.includes(lowerCaseSearch)) {
+          newList.push(list[i])
+          showPage(newList, 1)
+          addPagination(newList)
+        }
+      }
+     }
+})
 }
+nameSearch(data)
 
 
 
@@ -81,3 +95,4 @@ function addPagination(list) {
 // Call functions
 showPage(data, 1)
 addPagination(data)
+//nameSearch(data)
