@@ -14,20 +14,34 @@ searchLink.insertAdjacentHTML('beforeend', searchButton);
 function nameSearch(list) {
   searchLink.addEventListener('keyup', (event) => {
     let newList = []
+    let lowerCaseSearch = event.target.value.toLowerCase()
     if (event.target.tagName == "INPUT") {
-      let lowerCaseSearch = event.target.value.toLowerCase()
       for (let i = 0; i < list.length; i++){
-        let name = `${list[i].name.first.toLowerCase()} ${list[i].name.first.toLowerCase()}`
+        let name = `${list[i].name.first.toLowerCase()} ${list[i].name.last.toLowerCase()}`
         if (name.includes(lowerCaseSearch)) {
           newList.push(list[i])
           showPage(newList, 1)
           addPagination(newList)
+          console.log(newList)
+        } else {
+          let studentList = document.querySelector('.student-list')
+          studentList.innerHTML = ''
+          let studentItem = `
+            <h2>
+            <span class="date">No results match your search</span>
+            </h2>
+          `
+          studentList.insertAdjacentHTML('beforeend', studentItem);
+          //this code is sus
+          let linkList = document.querySelector('.link-list')
+          linkList.innerHTML = ''
+
         }
       }
      }
 })
 }
-nameSearch(data)
+
 
 
 
@@ -95,4 +109,4 @@ function addPagination(list) {
 // Call functions
 showPage(data, 1)
 addPagination(data)
-//nameSearch(data)
+nameSearch(data)
