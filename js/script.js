@@ -16,31 +16,19 @@ function nameSearch(list) {
     let newList = []
     let lowerCaseSearch = event.target.value.toLowerCase()
     if (event.target.tagName == "INPUT") {
+
       for (let i = 0; i < list.length; i++){
         let name = `${list[i].name.first.toLowerCase()} ${list[i].name.last.toLowerCase()}`
         if (name.includes(lowerCaseSearch)) {
           newList.push(list[i])
-          showPage(newList, 1)
-          addPagination(newList)
-          console.log(newList)
-        } else {
-          let studentList = document.querySelector('.student-list')
-          studentList.innerHTML = ''
-          let studentItem = `
-            <h2>
-            <span class="date">No results match your search</span>
-            </h2>
-          `
-          studentList.insertAdjacentHTML('beforeend', studentItem);
-          //this code is sus
-          let linkList = document.querySelector('.link-list')
-          linkList.innerHTML = ''
-
         }
       }
-     }
+        showPage(newList, 1)
+        addPagination(newList)
+    }
 })
 }
+
 
 
 
@@ -83,6 +71,9 @@ function showPage(list, page) {
 addPagination adds the appropriate amount of buttons based on the number of students
 */
 function addPagination(list) {
+
+  if (list.length > 0) {
+
   let numOfPages = Math.ceil(list.length / 9)
   let linkList = document.querySelector('.link-list')
   linkList.innerHTML = ''
@@ -104,6 +95,22 @@ function addPagination(list) {
       showPage(list, event.target.textContent)
      }
   })
+
+} else {
+    let studentList = document.querySelector('.student-list')
+    studentList.innerHTML = ''
+    let studentItem = `
+      <h2>
+      <span class="date">No results match your search</span>
+      </h2>
+    `
+    studentList.insertAdjacentHTML('beforeend', studentItem);
+    //this code is sus
+    let linkList = document.querySelector('.link-list')
+    linkList.innerHTML = ''
+}
+
+
 }
 
 // Call functions
