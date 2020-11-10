@@ -29,6 +29,27 @@ function nameSearch(list) {
 })
 }
 
+function buttonSearch(list) {
+  searchLink.addEventListener('click', (event) => {
+    let buttonValue = document.getElementById('search')
+    console.log(buttonValue.value)
+    let newList = []
+    let lowerCaseSearch = buttonValue.value.toLowerCase()
+    console.log(lowerCaseSearch)
+    if (event.target.tagName == "BUTTON") {
+
+      for (let i = 0; i < list.length; i++){
+        let name = `${list[i].name.first.toLowerCase()} ${list[i].name.last.toLowerCase()}`
+        if (name.includes(lowerCaseSearch)) {
+          newList.push(list[i])
+        }
+      }
+        showPage(newList, 1)
+        addPagination(newList)
+    }
+})
+}
+
 
 
 
@@ -117,3 +138,4 @@ function addPagination(list) {
 showPage(data, 1)
 addPagination(data)
 nameSearch(data)
+buttonSearch(data)
